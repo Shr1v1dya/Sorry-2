@@ -1,98 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Tap Me 🥺</title>
-  <style>
+<meta charset="UTF-8">
+<title>Sorry Card 🐧💐</title>
+<style>
     body {
-      background: #ffeef2;
-      font-family: Arial;
-      text-align: center;
-      padding: 40px;
+        margin: 0;
+        padding: 0;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        background: linear-gradient(to bottom, #aee1f9, #ffffff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
     }
-    .box {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      max-width: 400px;
-      margin: auto;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    .card {
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        max-width: 350px;
+        position: relative;
     }
+
+    .penguin {
+        font-size: 80px;
+    }
+
+    h2 {
+        margin: 10px 0;
+        color: #333;
+    }
+
+    p {
+        font-size: 18px;
+        color: #555;
+    }
+
+    .buttons {
+        margin-top: 20px;
+    }
+
     button {
-      margin-top: 20px;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 10px;
-      background: #ff4d6d;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
     }
-  </style>
+
+    .yes {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .yes:hover {
+        background-color: #45a049;
+    }
+
+    .no {
+        background-color: #ccc;
+        color: #666;
+        cursor: not-allowed;
+    }
+
+    /* Explosion message */
+    .explosion {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff4081;
+        text-align: center;
+        transition: transform 0.6s ease;
+    }
+
+    .show {
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+
+    /* Confetti */
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        top: -10px;
+        animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(100vh) rotate(360deg);
+        }
+    }
+</style>
 </head>
 <body>
 
-<div class="box" id="game">
-  <h2>Hey you ❤️</h2>
-  <p>Tap this... only if you still love me a little 🥺</p>
-  <button onclick="next()">Tap</button>
+<div class="card">
+    <div class="penguin">🐧💐</div>
+    <h2>I'm Really Sorry 😔</h2>
+    <p>Please forgive me?</p>
+
+    <div class="buttons">
+        <button class="yes" onclick="sayYes()">Yes 💖</button>
+        <button class="no" disabled>No 😢</button>
+    </div>
+
+    <div id="message" class="explosion">
+        💥 You are officially my boyfriend now! 💖
+    </div>
 </div>
 
 <script>
-let step = 0;
+function sayYes() {
+    const msg = document.getElementById("message");
+    msg.classList.add("show");
 
-function next() {
-  const game = document.getElementById("game");
+    // Create confetti
+    for (let i = 0; i < 30; i++) {
+        let confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = getRandomColor();
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+        document.body.appendChild(confetti);
 
-  if (step === 0) {
-    game.innerHTML = `
-      <h3>Okay… one more tap 😌</h3>
-      <p>I know you're mad... but stay 10 seconds?</p>
-      <button onclick="next()">Stay</button>
-    `;
-  }
-
-  else if (step === 1) {
-    game.innerHTML = `
-      <h3>🥺</h3>
-      <p>I miss you already...</p>
-      <button onclick="next()">Next</button>
-    `;
-  }
-
-  else if (step === 2) {
-    game.innerHTML = `
-      <h3>💭</h3>
-      <p>You’re my favorite person… even when you're angry 😔</p>
-      <button onclick="next()">Next</button>
-    `;
-  }
-
-  else if (step === 3) {
-    game.innerHTML = `
-      <h3>Almost there 💛</h3>
-      <p>I don’t like fighting with you… at all.</p>
-      <button onclick="next()">Next</button>
-    `;
-  }
-
-  else if (step === 4) {
-    game.innerHTML = `
-      <h2>I'm sorry ❤️</h2>
-      <p>
-        I really didn’t mean to hurt you.<br><br>
-        You matter too much to me…<br><br>
-        Can we fix this? 🥺
-      </p>
-      <button onclick="hug()">Last Tap</button>
-    `;
-  }
-
-  step++;
+        setTimeout(() => confetti.remove(), 3000);
+    }
 }
 
-function hug() {
-  alert("You unlocked: 1 tight hug + unlimited love ❤️");
+function getRandomColor() {
+    const colors = ["#ff4081", "#4CAF50", "#2196F3", "#FFC107", "#9C27B0"];
+    return colors[Math.floor(Math.random() * colors.length)];
 }
 </script>
 
