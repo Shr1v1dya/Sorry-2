@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tap Me 🥺</title>
+  <style>
+    body {
+      background: #ffeef2;
+      font-family: Arial;
+      text-align: center;
+      padding: 40px;
+    }
+    .box {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ff4d6d;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box" id="game">
+  <h2>Hey you ❤️</h2>
+  <p>Tap this... only if you still love me a little 🥺</p>
+  <button onclick="next()">Tap</button>
+</div>
+
+<script>
+let step = 0;
+
+function next() {
+  const game = document.getElementById("game");
+
+  if (step === 0) {
+    game.innerHTML = `
+      <h3>Okay… one more tap 😌</h3>
+      <p>I know you're mad... but stay 10 seconds?</p>
+      <button onclick="next()">Stay</button>
+    `;
+  }
+
+  else if (step === 1) {
+    game.innerHTML = `
+      <h3>🥺</h3>
+      <p>I miss you already...</p>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  else if (step === 2) {
+    game.innerHTML = `
+      <h3>💭</h3>
+      <p>You’re my favorite person… even when you're angry 😔</p>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  else if (step === 3) {
+    game.innerHTML = `
+      <h3>Almost there 💛</h3>
+      <p>I don’t like fighting with you… at all.</p>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  else if (step === 4) {
+    game.innerHTML = `
+      <h2>I'm sorry ❤️</h2>
+      <p>
+        I really didn’t mean to hurt you.<br><br>
+        You matter too much to me…<br><br>
+        Can we fix this? 🥺
+      </p>
+      <button onclick="hug()">Last Tap</button>
+    `;
+  }
+
+  step++;
+}
+
+function hug() {
+  alert("You unlocked: 1 tight hug + unlimited love ❤️");
+}
+</script>
+
+</body>
+</html>
